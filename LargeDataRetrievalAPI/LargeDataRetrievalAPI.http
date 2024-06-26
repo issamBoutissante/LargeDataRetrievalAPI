@@ -1,0 +1,6 @@
+@LargeDataRetrievalAPI_HostAddress = http://localhost:5196
+
+GET {{LargeDataRetrievalAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,4 +1,5 @@
 using LargeDataRetrievalAPI.Data;
+using LargeDataRetrievalAPI.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -13,7 +14,19 @@ builder.Services.AddDbContext<LargeDataContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+
+builder.Logging.AddConsole();
+
 var app = builder.Build();
+
+//Seed the database
+using(var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<LargeDataContext>();
+    var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
+    context.Database.Migrate(); // Ensure database is created and migrated to latest version
+    await context.SeedDataAsync(); // Call the extension method to seed data
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

@@ -14,6 +14,4 @@ namespace LargeDataRetrievalAPI.Models
         public Status Status { get; set; }
         public Priority Priority { get; set; }
     }
-
-
 }

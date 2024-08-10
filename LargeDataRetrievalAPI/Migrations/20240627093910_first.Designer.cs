@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LargeDataRetrievalAPI.Migrations
 {
     [DbContext(typeof(LargeDataContext))]
-    [Migration("20240625145802_first")]
+    [Migration("20240627093910_first")]
     partial class first
     {
         /// <inheritdoc />
